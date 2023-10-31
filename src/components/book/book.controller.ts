@@ -36,15 +36,15 @@ export class BookController {
 
   @ApiOperation({ summary: 'Get all entities with pagination' })
   @ApiQuery({
-    name: 'page',
-    type: Number,
-    description: 'Page number',
-    required: false,
-  })
-  @ApiQuery({
     name: 'limit',
     type: Number,
     description: 'Number of items per page',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'page',
+    type: Number,
+    description: 'Page number',
     required: false,
   })
   @ApiResponse({ status: 200, description: 'Return all entities' })

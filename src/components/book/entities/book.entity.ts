@@ -24,7 +24,8 @@ export class Book {
   avatar: string;
   @Column()
   link: string;
-
+  @Column()
+  description: string;
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 

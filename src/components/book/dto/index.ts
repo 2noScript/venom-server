@@ -10,10 +10,10 @@ export class CreateBookDto {
   avatar: string;
   @ApiProperty()
   link: string;
+  @ApiProperty()
+  description: string;
   @ApiProperty({ type: [String] })
   genres: string[];
-  // @ApiProperty({ type: [CreateGenreDto] })
-  // dk: CreateGenreDto[];
 }
 
 export class UpdateBookDto extends PartialType(CreateBookDto) {}
