@@ -7,6 +7,7 @@ import { BookModule } from './components/book/book.module';
 import { DataSource } from 'typeorm';
 import { GenreModule } from './components/genre/genre.module';
 import { SupplierModule } from './components/supplier/supplier.module';
+import { BookDetailModule } from './components/book-detail/book-detail.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { SupplierModule } from './components/supplier/supplier.module';
     BookModule,
     GenreModule,
     SupplierModule,
+    BookDetailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

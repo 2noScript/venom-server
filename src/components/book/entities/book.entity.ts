@@ -1,3 +1,4 @@
+import { BookDetail } from 'src/components/book-detail/entities/book-detail.entity';
 import { Genre } from 'src/components/genre/entities/genre.entity';
 import {
   Entity,
@@ -10,6 +11,7 @@ import {
   JoinTable,
   ManyToMany,
   BeforeRemove,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -20,21 +22,26 @@ export class Book {
   identifier: string;
   @Column()
   name: string;
-  @Column()
-  avatar: string;
-  @Column()
-  link: string;
+
   @Column()
   description: string;
-  @CreateDateColumn({ type: 'timestamp' })
-  created_at: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
-  updated_at: Date;
-
-  @ManyToMany(() => Genre, (genre) => genre.books, { onDelete: 'CASCADE' })
+  @ManyToMany(() => Genre, (genre) => genre.books, {
+    onDelete: 'CASCADE',
+    eager: true,
+  })
   @JoinTable()
   genres: Genre[];
+
+  @OneToMany(() => BookDetail, (bookDetail) => bookDetail.book, {
+    onDelete: 'CASCADE',
+  })
+  bookDetail: BookDetail;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date;
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
 
   @BeforeInsert()
   updateTimestampsOnCreate() {

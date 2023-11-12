@@ -9,6 +9,6 @@ export class Genre {
   identifier: string;
   @Column()
   name: string;
-  @ManyToMany(() => Book, (book) => book.genres)
+  @ManyToMany(() => Book, (book) => book.genres, { onDelete: 'CASCADE' })
   books: Book[];
 }

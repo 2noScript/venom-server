@@ -7,6 +7,7 @@ import {
   Delete,
   Query,
   ParseIntPipe,
+  DefaultValuePipe,
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import {
@@ -34,26 +35,22 @@ export class BookController {
     return await this.bookService.createMultiple(books);
   }
 
-  @ApiOperation({ summary: 'Get all entities with pagination' })
   @ApiQuery({
     name: 'limit',
     type: Number,
     description: 'Number of items per page',
-    required: false,
+    required: true,
   })
   @ApiQuery({
     name: 'page',
     type: Number,
     description: 'Page number',
-    required: false,
+    required: true,
   })
   @ApiResponse({ status: 200, description: 'Return all entities' })
   @Get()
-  async findAll(
-    @Query('page', ParseIntPipe) page = 1,
-    @Query('limit', ParseIntPipe) limit = 10,
-  ) {
-    return await this.bookService.findAll(page, limit);
+  async findAll(@Query('page') page, @Query('limit') limit) {
+    return await this.bookService.findBooks(page, limit);
   }
   @Delete('remove/:id')
   async remove(@Param('id') id: number) {

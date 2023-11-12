@@ -57,7 +57,7 @@ export class BookService {
     await this.bookRepository.remove(item);
   }
 
-  async findAll(page: number, limit: number) {
+  async findBooks(page: number, limit: number) {
     const skip = (page - 1) * limit;
     return await this.bookRepository.find({
       relations: ['genres'],
